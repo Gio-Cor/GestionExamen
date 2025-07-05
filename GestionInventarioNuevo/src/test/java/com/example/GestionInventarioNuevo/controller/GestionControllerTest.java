@@ -27,8 +27,8 @@ public class GestionControllerTest {
     @MockBean
     private GestionInventarioService gestionInventarioService;
 
-    @Test
-    void listarInventario_debeRetornarListaYStatus200() throws Exception {
+        @Test
+        public void listarInventario_debeRetornarListaYStatus200() throws Exception {
         GestionInv2 producto = new GestionInv2();
         producto.setNombre("Producto Test");
         producto.setPrecio(100.0);
@@ -44,8 +44,8 @@ public class GestionControllerTest {
         mockMvc.perform(get("/api/v1/inventario")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].nombre").value("Producto Test"));
-    }
+                .andExpect(jsonPath("$._embedded.gestionInv2List[0].nombre").value("Producto Test"));
+        }
 
     @Test
     void listarInventario_debeRetornarNoContentSiVacio() throws Exception {
